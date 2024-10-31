@@ -5,28 +5,36 @@ import axios from 'axios';
 
 export default function Header() {
     const { user, setUser } = useContext(UserContext);
-    const [dropdownOpen, setDropdownOpen] = useState(false); //state for user icon dropdown
-    const [exploreDropdownOpen, setExploreDropdownOpen] = useState(false); // State for Explore dropdown
-    const dropdownRef = useRef(null); // Ref for user dropdown
-    const exploreDropdownRef = useRef(null); // Ref for explore dropdown
+    
+    // Check if the user is an admin or staff
+    const isAdminOrStaff = user && (user.role === 'admin' || user.role === 'staff');
+
+    // If the user is an admin or staff, return null to hide the header
+    if (isAdminOrStaff) {
+        return null; // Do not render the Header
+    }
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [exploreDropdownOpen, setExploreDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const exploreDropdownRef = useRef(null);
     const navigate = useNavigate();
 
     // Function to handle logout
     async function handleLogout() {
         await axios.post('http://localhost:4000/logout', {}, { withCredentials: true });
         setUser(null);
-        navigate('/'); //this redirects to the index
+        navigate('/');
     }
 
     // Handle closing user dropdown on clicking outside
     useEffect(() => {
         function handleClickOutside(event) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setDropdownOpen(false); // Close user dropdown if clicked outside
+                setDropdownOpen(false);
             }
         }
 
-        // Add event listener when dropdown is open
         if (dropdownOpen) {
             document.addEventListener("mousedown", handleClickOutside);
         } else {
@@ -42,7 +50,7 @@ export default function Header() {
     useEffect(() => {
         function handleClickOutside(event) {
             if (exploreDropdownRef.current && !exploreDropdownRef.current.contains(event.target)) {
-                setExploreDropdownOpen(false); // Close explore dropdown if clicked outside
+                setExploreDropdownOpen(false);
             }
         }
 
@@ -59,12 +67,16 @@ export default function Header() {
 
     return (
         <div>
-            <header className="flex justify-between">
+            <header className="py-6 px-20 flex justify-between">
                 <Link to={'/'} className="flex items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8 -rotate-90">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
                     </svg>
+<<<<<<< HEAD
                     <span className="font-bold text-xl">Hikeko</span>
+=======
+                    <span className="font-bold text-xl">hikeko</span>
+>>>>>>> 8a71dc8 (lowercase hikeko)
                 </Link>
                 <div className="flex gap-2 border border-gray-300 rounded-full py-2 px-4 shadow-md shadow-gray-300">
                     <div>Anywhere</div>
