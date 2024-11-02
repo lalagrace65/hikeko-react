@@ -18,6 +18,7 @@ import BusinessDetails from "./pages/BusinessDetails";
 import TrailDetail from "./components/trails/TrailDetails";
 import AddPackageTrails from "./pages/AddPackageTrails";
 import AdminTrailDetails from "./components/trails/AdminTrailDetails";
+import CustomerPackageDetails from "./pages/CustomerPackageDetails";
 
 // Set default axios settings
 axios.defaults.baseURL = 'http://127.0.0.1:4000';
@@ -44,6 +45,7 @@ function App() {
           <Route path="/trails/adminPackage/:id" element={<AdminTrailDetails />} />
           <Route path="/travelAgencySignUp" element={<TravelAgencySignUp />} />
           <Route path="/travelAgencySignUp/businessDetails" element={<BusinessDetails />} />
+          <Route path="/bookings/packages/:packageId" element={<CustomerPackageDetails />}/>
 
             {/* Protect the user-profile route */}
             <Route path="/user-profile" element={
