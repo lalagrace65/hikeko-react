@@ -13,8 +13,12 @@ const travel_agencyRoute = require('./routes/travel_agencyRoute');
 const user_dashboardRoute = require('./routes/user_dashboardRoute');
 const packageRoute = require('./routes/packageRoute');
 const featuresRoute = require('./routes/featureRoute');
-const  signUpRoute = require('./routes/TravelAgency/signUp');
+const signUpRoute = require('./routes/TravelAgency/signUp');
 const trailsRoute = require('./routes/trailsRoute');
+const uploadRoute = require('./routes/uploadRoute');
+const customerPackagesRoute = require('./routes/Customer/packages');
+const bookingRoute = require('./routes/Customer/joinerDetails');
+
 
 const app = express();
 
@@ -41,6 +45,10 @@ app.use(packageRoute); // For package routing
 app.use('/api', featuresRoute); // Prefix with '/api'
 app.use(signUpRoute);
 app.use('/api', trailsRoute);
+app.use(uploadRoute);
+app.use('/api', customerPackagesRoute);
+app.use('/api', bookingRoute);
+
 
 
 

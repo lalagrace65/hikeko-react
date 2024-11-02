@@ -1,3 +1,4 @@
+import React from 'react';
 import { 
   Card, 
   CardHeader, 
@@ -8,16 +9,18 @@ import {
 } from '@/components/ui/card';
 import {
   Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import CredentialForm from '@/components/forms/CredentialForm';
+  AccordionHeader,
+  AccordionBody,
+} from "@material-tailwind/react";
+import { FaAngleDown } from "react-icons/fa";
+import CredForm from '@/components/forms/CredForm';
 
 export default function TravelAgencyCredentialsHome() {
+  //material tailwind
+  const [open, setOpen] = React.useState(0);
+  const handleOpen = (value) => setOpen(open === value ? 0 : value);
   return (
     <div className="relative min-h-screen flex flex-col">
-
       {/* Cover photo and form */}
       <div className="relative flex-grow">
         {/* Cover photo */}
@@ -48,7 +51,7 @@ export default function TravelAgencyCredentialsHome() {
             <h2 className="text-xl font-semibold mb-4">
               Ready to grow your business?
             </h2>
-              <CredentialForm />
+              <CredForm />
           </div>
         </div>
       </div>
@@ -143,31 +146,36 @@ export default function TravelAgencyCredentialsHome() {
       {/* Any questions? */}
       <div className='mt-10 flex flex-col items-center'>
         <h2 className="text-2xl font-bold mb-4 text-center">Any questions?</h2>
-        <Accordion type="single" collapsible className="max-w-2xl w-full">
-          <AccordionItem value="item-1">
-            <AccordionTrigger className="text-center bg-slate-300 mb-2">How do I get started?</AccordionTrigger>
-            <AccordionContent className="text-justify">
-              Step 1: Submit your restaurant information here <br />
+        
+        <Accordion open={open === 1} icon={<FaAngleDown id={1} open={open} />}>
+        <AccordionHeader onClick={() => handleOpen(1)}>What is Material Tailwind?</AccordionHeader>
+        <AccordionBody>
+          Step 1: Submit your restaurant information here <br />
               <br />
               Step 2: We will review your application request <br />
               <br />
               Step 3: Upload documents such as your ID Card, Menu, Business License, Bank Account Statements <br />
               <br />
               Step 4: Fill up the contract via the link in the email to complete your registration
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger className="text-center bg-slate-300 mb-2">Why should my service partner with Hikeko?</AccordionTrigger>
-            <AccordionContent className="text-justify">
+        </AccordionBody>
+      </Accordion>
+      <Accordion open={open === 2} icon={<FaAngleDown id={2} open={open} />}>
+        <AccordionHeader onClick={() => handleOpen(2)}>
+          How to use Material Tailwind?
+        </AccordionHeader>
+        <AccordionBody>
               As a partner with Hikeko, you will enjoy brand exposure to more than 1 million customers
               via our platform and marketing channels, access to our rider fleet, 
               incremental revenue, and business insights to help track and analyze 
               your restaurant's performance!
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger className="text-center bg-slate-300 mb-2">How does a partnership with Hikeko work?</AccordionTrigger>
-            <AccordionContent className="text-justify">
+
+        </AccordionBody>
+      </Accordion>
+      <Accordion open={open === 3} icon={<FaAngleDown id={3} open={open} />}>
+        <AccordionHeader onClick={() => handleOpen(3)}>
+          What can I do with Material Tailwind?
+        </AccordionHeader>
+        <AccordionBody>
               You simply register your travel agency while we do all the rest! 
               Give us your delivery-optimized menu and food images (if you have),
               and we create your online profile. <br/>
@@ -176,9 +184,12 @@ export default function TravelAgencyCredentialsHome() {
               and prepare your food within 15 mins! Our reliable and friendly 
               rider will pick up the order from your shop and deliver it to the 
               customer. It's that simple!
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+        </AccordionBody>
+      </Accordion>      
+
+
+
+
       </div>
     </div>
   );
